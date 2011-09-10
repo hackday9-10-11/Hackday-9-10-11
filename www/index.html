@@ -45,7 +45,7 @@
 					$.getJSON("/trail_magic.json", function(data) {
 						$.each(data.results, function(index) {
 							var magic = data.results[index];
-							$('#map_canvas_2').gmap('addMarker', { 'position': new google.maps.LatLng(place.lng, place.lat)} , function(map, marker){
+							$('#map_canvas_2').gmap('addMarker', { 'position': new google.maps.LatLng(magic.lng, magic.lat)} , function(map, marker){
 								$('#map_canvas_2').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': magic.contents}, function(iw) {
 									$(marker).click(function() {
 										iw.open(map, marker);
