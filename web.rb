@@ -14,7 +14,7 @@ post '/found_trail_magic' do
 
 	  magic = Hash.new
 	  magic["lat"] = params[:lat];
-	  magic["long"] = params[:long];
+	  magic["lng"] = params[:lng];
 	  magic["contents"] = params[:contents];
 	  coll.insert magic
 	  redirect '/index.html'
