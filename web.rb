@@ -9,7 +9,7 @@ get '/hotels' do
 
 	api = 'xp9m6tekaqpy8fqzd8qahyre';
 	url = 'http://api.ean.com/ean-services/rs/hotel/v3/list?cid=55505&apiKey=' + api + '&locale=en_US&currencyCode=USD&latitude=' + params[:lat] + '&longitude=' + params[:lng];
-	response = http.request_get(url);
+	response = Net::HTTP.request_get(url);
 	return response.body
 end
 
