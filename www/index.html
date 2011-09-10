@@ -14,13 +14,31 @@
 
     <script>
 			////////////////////////////////////////////////////////////
+    		function createInfoChimpsURL() {
+    			var apiKey = "jefflinwood-uB5YyYgJQRtYz-mN5u-zaoKld69";
+    			return "http://api.infochimps.com/geo/location/foursquare/places/search?g.radius=1000&g.latitude=30.3&g.longitude=-97.75&apikey=" + apiKey + "&f._type=business.bar_or_pub";
+    		}
+			////////////////////////////////////////////////////////////
 
 			$('#trail_map').live("pageshow", function() {
 					$.each(trail, function(index) {
 						var point = trail[index];
-						$('#map_canvas_2').gmap('addMarker', { 'html': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true } );
+						$('#map_canvas_2').gmap('addMarker', { 'name': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true }, function(map, marker){
+							$('#map_canvas_2').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': point.name }, function(iw) {
+                        		$(marker).click(function() {
+                                	iw.open(map, marker);
+                                	map.panTo(marker.getPosition());
+                        		});                                                                                                                                                                                                                               
+                			});
+						});
 					});
-
+					/*$.getJSON(createInfoChimpsURL(), function(data) {
+						$.each(data.results, function(index) {
+							var place = data.results[index];
+							console.log(place.name);
+							$('#map_canvas_2').gmap('addMarker', { 'position': new google.maps.LatLng(34.62673, -84.193656), 'bounds': true} );
+						});
+					});*/
 				$('#map_canvas_2').gmap('refresh');
 			});
 
