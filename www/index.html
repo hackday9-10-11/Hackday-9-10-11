@@ -36,13 +36,12 @@
                 			});
 						});
 					});
-					/*$.getJSON(createInfoChimpsURL(), function(data) {
+					$.getJSON(createInfoChimpsURL(), function(data) {
 						$.each(data.results, function(index) {
 							var place = data.results[index];
-							console.log(place.name);
-							$('#map_canvas_2').gmap('addMarker', { 'position': new google.maps.LatLng(34.62673, -84.193656), 'bounds': true} );
+							$('#map_canvas_2').gmap('addMarker', { 'position': new google.maps.LatLng(place.coordinates[1], place.coordinates[0])} );
 						});
-					});*/
+					});
 				$('#map_canvas_2').gmap('refresh');
 			});
 
