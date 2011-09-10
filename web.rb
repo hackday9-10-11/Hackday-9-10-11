@@ -27,5 +27,5 @@ get '/trail_magic.json' do
 	db = conn.db(uri.path.gsub(/^\//, ''))
 	coll = db.collection("magic");
 	
-	collfind().to_a.to_json
+	coll.find().to_a.to_json
 end
