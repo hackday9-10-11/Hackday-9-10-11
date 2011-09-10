@@ -18,13 +18,17 @@
     			var apiKey = "jefflinwood-uB5YyYgJQRtYz-mN5u-zaoKld69";
     			return "http://api.infochimps.com/geo/location/foursquare/places/search?g.radius=1000&g.latitude=30.3&g.longitude=-97.75&apikey=" + apiKey + "&f._type=business.bar_or_pub";
     		}
+    		
+    		function createTrailContent(point) {
+    			return point.name + "<p/> MP:" + point.to_springer + " from Springer";
+    		}
 			////////////////////////////////////////////////////////////
 
 			$('#trail_map').live("pageshow", function() {
 					$.each(trail, function(index) {
 						var point = trail[index];
-						$('#map_canvas_2').gmap('addMarker', { 'name': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true }, function(map, marker){
-							$('#map_canvas_2').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': point.name }, function(iw) {
+						$('#map_canvas_2').gmap('addMarker', { 'title': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true }, function(map, marker){
+							$('#map_canvas_2').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': createTrailContent(point)}, function(iw) {
                         		$(marker).click(function() {
                                 	iw.open(map, marker);
                                 	map.panTo(marker.getPosition());
