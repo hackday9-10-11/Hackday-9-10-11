@@ -1,5 +1,7 @@
 require 'sinatra'
 
-get '/' do
-  "Hello, world"
+set :public, File.dirname(__FILE__) + '/www'
+
+get '/app' do
+  
 end
