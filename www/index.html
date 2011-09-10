@@ -18,7 +18,7 @@
     			var apiKey = "jefflinwood-uB5YyYgJQRtYz-mN5u-zaoKld69";
     			return "http://api.infochimps.com/geo/location/foursquare/places/search?g.radius=1000&g.latitude=30.3&g.longitude=-97.75&apikey=" + apiKey + "&f._type=business.bar_or_pub";
     		}
-    		
+
     		function createTrailContent(point) {
     			return point.name + "<p/> MP:" + point.to_springer + " from Springer";
     		}
@@ -83,7 +83,7 @@
 			});
 
 			$('#find_a_hotel').live("pagecreate", function () {
-				$('#map_canvas_3').gmap();
+				$('#map_canvas_3').gmap({center: '30.264632, -97.728201', zoom: 15});
 			});
     </script>
   </head>
