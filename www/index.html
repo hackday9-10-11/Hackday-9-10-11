@@ -78,7 +78,7 @@
 
 			$('#find_a_hotel').live("pageshow", function () {
 				$('#map_canvas_3').gmap('refresh');
-				$('#map_canvas_3').gmap('getCurrentPosition', function(position, status) {
+				$('#map_canvas_3').gmap('watchPosition', function(position, status) {
 
 					if ( status === 'OK' ) {
 						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -90,11 +90,12 @@
 						$.get(create_ean_url(position.coords.latitude, position.coords.longitude),
 						function(json){
 							$(json.HotelListResponse.HotelList.HotelSummary).each(function(index) {
-								console.log(this);
-								var hotel_location = new google.maps.LatLng(this.latitude, this.longitude);
+								var hotel = this;
+								console.log(hotel);
+								var hotel_location = new google.maps.LatLng(hotel.latitude, hotel.longitude);
 
-								$('#map_canvas_3').gmap('addMarker', { 'title': 'tbd', 'position': hotel_location, 'bounds': true }, function(map, marker){
-									$('#map_canvas_3').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': 'tbs'}, function(iw) {
+								$('#map_canvas_3').gmap('addMarker', { 'title': hotel.name, 'position': hotel_location, 'bounds': true }, function(map, marker){
+									$('#map_canvas_3').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': '$' + hotel.lowRate}, function(iw) {
 		                        		$(marker).click(function() {
 		                                	iw.open(map, marker);
 		                                	map.panTo(marker.getPosition());
