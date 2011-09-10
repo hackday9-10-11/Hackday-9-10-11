@@ -66,14 +66,42 @@
 				$('#map_canvas_2').gmap('clearWatch');
 			});
 
+			/////////////////////////////////////////////////////
+
+			function create_ean_url (lat, lng) {
+				var api = 'xp9m6tekaqpy8fqzd8qahyre';
+				var url = 'http://api.ean.com/ean-services/rs/hotel/v3/list?cid=55505&apiKey=' + api + '&locale=en_US&currencyCode=USD&latitude=' + lat + '&longitude=' + lng;
+				return url;
+			}
+
+			/////////////////////////////////////////////////////
+
 			$('#find_a_hotel').live("pageshow", function () {
 				$('#map_canvas_3').gmap('refresh');
 				$('#map_canvas_3').gmap('getCurrentPosition', function(position, status) {
 
 					if ( status === 'OK' ) {
-						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 						$('#map_canvas_3').gmap('get', 'map').panTo(latlng);
 						$('#map_canvas_3').gmap('search', { 'location': latlng }, function(results, status) {
+						});
+
+
+						$.get(create_ean_url(position.coords.latitude, position.coords.longitude),
+						function(json){
+							$(json.HotelListResponse.HotelList.HotelSummary).each(function(index) {
+								console.log(this);
+								var hotel_location = new google.maps.LatLng(this.latitude, this.longitude);
+
+								$('#map_canvas_3').gmap('addMarker', { 'title': 'tbd', 'position': hotel_location, 'bounds': true }, function(map, marker){
+									$('#map_canvas_3').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': 'tbs'}, function(iw) {
+		                        		$(marker).click(function() {
+		                                	iw.open(map, marker);
+		                                	map.panTo(marker.getPosition());
+		                        		});
+		                			});
+								});
+							});
 						});
 					} else {
 						alert('Unable to get current position');
