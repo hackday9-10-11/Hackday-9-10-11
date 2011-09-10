@@ -67,7 +67,32 @@
 				$('#map_canvas_2').gmap('clearWatch');
 			});
 
+			$('#find_a_hotel').live("pageshow", function () {
+				$('#map_canvas_3').gmap('refresh');
+			});
 
+			$('#find_a_hotel').live("pagecreate", function () {
+				$('#map_canvas_3').gmap({'mapTypeId': 'terrain'}).bind('init', function(evt, map) {
+					$('#map_canvas_3').gmap('watchPosition', function(position, status) {
+						if ( status === 'OK' ) {
+							var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+							var marker = $('#map_canvas_3').gmap('get', 'markers > client' );
+							if ( !marker ) {
+								console.log('marker');
+								$('#map_canvas_3').gmap('addMarker', { 'id': 'client', 'position': latlng, 'bounds': true });
+							} else {
+								console.log('nomarker');
+								marker.setPosition(latlng);
+								map.panTo(latlng);
+							}
+						}
+					});
+				});
+			});
+
+			$('#find_a_hotel').live("pagehide", function() {
+				$('#map_canvas_3').gmap('clearWatch');
+			});
     </script>
   </head>
   <body>
