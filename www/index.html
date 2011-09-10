@@ -83,8 +83,9 @@
 				$.getJSON(create_ean_url('30.264632', '-97.728201'),
 				function(json){
 					var hotels = json.HotelListResponse.HotelList.HotelSummary.slice(0, 10);
-
 					var template = $('#hotelTemplate').html();
+
+					$('#hotel_list').listview();
 
 					$(hotels).each(function(index) {
 						var hotel = this;
@@ -113,6 +114,8 @@
 
 							$('#hotel_list').append(Mustache.to_html(template, hotel_data));
 						};
+
+						$('#hotel_list').listview('refresh');
 
 					});
 				});
@@ -179,12 +182,12 @@
 					<div id="map_canvas_3" style="height:300px;"></div>
 				</div>
 				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
-					<ul id="hotel_list" data-role="listview" class="ui-listview">
+					<ul id="hotel_list" data-role="listview" data-theme="g">
 					</ul>
 				</div>
 			</div>
 			<script type="text/template" id="hotelTemplate">
-				<li class="ui-li ui-li-static ui-body-c">{{hotel_name}} - {{hotel_price}} - {{hotel_address}} - Rating: {{hotel_rating}}</li>
+				<li>{{hotel_name}} - {{hotel_price}} - {{hotel_address}} - Rating: {{hotel_rating}}</li>
 			</script>
 		</div>
 
