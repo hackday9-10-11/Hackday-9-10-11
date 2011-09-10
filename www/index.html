@@ -93,7 +93,7 @@
 			function create_ean_url (lat, lng) {
 				var api = 'xp9m6tekaqpy8fqzd8qahyre';
 				var url = 'http://api.ean.com/ean-services/rs/hotel/v3/list?cid=55505&apiKey=' + api + '&locale=en_US&currencyCode=USD&latitude=' + lat + '&longitude=' + lng;
-				return url;
+				return "/hotels?lat=" + lat + "&lng=" + lng;
 			}
 
 			/////////////////////////////////////////////////////

@@ -2,15 +2,17 @@ require 'sinatra'
 require 'json'
 require 'mongo'
 require 'net/http'
+require 'uri'
 
 set :public, File.dirname(__FILE__) + '/www'
 
 get '/hotels' do
-
+content_type :json
 	api = 'xp9m6tekaqpy8fqzd8qahyre';
 	url = 'http://api.ean.com/ean-services/rs/hotel/v3/list?cid=55505&apiKey=' + api + '&locale=en_US&currencyCode=USD&latitude=' + params[:lat] + '&longitude=' + params[:lng];
-	response = Net::HTTP.request_get(url);
-	return response.body
+	uri = URI.parse(url)
+	res = Net::HTTP.get_response(uri);
+	res.body
 end
 
 
