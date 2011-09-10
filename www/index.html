@@ -94,13 +94,15 @@
 
 				$.getJSON(create_ean_url('30.264632', '-97.728201'),
 				function(json){
-					$(json.HotelListResponse.HotelList.HotelSummary).each(function(index) {
+					var hotels = json.HotelListResponse.HotelList.HotelSummary.slice(0, 10);
+					$(hotels).each(function(index) {
 						var hotel = this;
 						var hotel_location = new google.maps.LatLng(hotel.latitude, hotel.longitude);
 
 						if (hotel.lowRate != 0) {
+							var rate = Math.round(hotel.lowRate);
 							$('#map_canvas_3').gmap('addMarker', { 'title': hotel.name, 'position': hotel_location, 'bounds': true }, function(map, marker){
-								$('#map_canvas_3').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': hotel.name + ' $' + hotel.lowRate}, function(iw) {
+								$('#map_canvas_3').gmap('addInfoWindow', { 'position':marker.getPosition(), 'content': hotel.name + ' $' + rate}, function(iw) {
 	                        		$(marker).click(function() {
 	                                	iw.open(map, marker);
 	                                	map.panTo(marker.getPosition());
