@@ -1,4 +1,4 @@
-trail_data = [
+var trail = [
 	{
 		"type": "FEATURE",
 		"name": "Springer Mt (3782 ft)",
