@@ -17,6 +17,7 @@ post '/found_trail_magic' do
 	  magic["long"] = params[:long];
 	  magic["contents"] = params[:contents];
 	  coll.insert magic
+	  redirect '/index.html'
 end
 
 get '/trail_magic.json' do
