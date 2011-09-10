@@ -15,6 +15,12 @@
 			////////////////////////////////////////////////////////////
 			
 			$('#trail_map').live("pageshow", function() {
+				var apiURL = "http://api.infochimps.com/geo/location/foursquare/places/search?g.radius=1000&g.latitude=30.3&g.longitude=-97.75&apikey=jefflinwood-uB5YyYgJQRtYz-mN5u-zaoKld69&f._type=business.bar_or_pub"
+				$.getJSON(apiURL, function(data) {
+					
+					$('#map_canvas_2').gmap('addMarker', { 'name': "Jeff", 'position': new google.maps.LatLng(34.62, -84.1936), 'bounds': true } );
+					
+				})
 				$('#map_canvas_2').gmap('refresh');
 			});
 			
@@ -86,8 +92,6 @@
 				</form>
 			</div>
 		</div>
-			
-	
       
   </body>
 </html>
