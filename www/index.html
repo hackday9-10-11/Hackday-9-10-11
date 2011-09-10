@@ -18,7 +18,7 @@
 			$('#trail_map').live("pageshow", function() {
 					$.each(trail, function(index) {
 						var point = trail[index];
-						$('#map_canvas_2').gmap('addMarker', { 'name': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true } );
+						$('#map_canvas_2').gmap('addMarker', { 'html': point.name, 'position': new google.maps.LatLng(point.lat, point.lon), 'bounds': true } );
 					});
 
 				$('#map_canvas_2').gmap('refresh');
@@ -60,7 +60,7 @@
               <p/>
               <a id="foundTrailMagic" href="#found_trail_magic" data-role="button">Found Trail Magic</a>
               <p/>
-              <a id="rainyDayButton" data-role="button">Find a Hotel</a>
+              <a id="findAHotel" href="#find_a_hotel" data-role="button">Find a Hotel</a>
 
           </div>
       </div>
@@ -90,6 +90,18 @@
 						<button type="submit" data-theme="b" name="submit" value="submit-value">Submit</button>
 					</div>
 				</form>
+			</div>
+		</div>
+
+		<div data-title="Find a Hotel" id="find_a_hotel" data-role="page">
+			<div data-role="header" data-add-back-btn="true">
+				<h1>Find a Hotel</h1>
+				<a href="index.html" data-ajax="false" data-icon="home">Home</a>
+			</div>
+			<div data-role="content">
+				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+					<div id="map_canvas_3" style="height:300px;"></div>
+				</div>
 			</div>
 		</div>
 
