@@ -6,7 +6,7 @@ set :public, File.dirname(__FILE__) + '/www'
 
 
 
-get '/found_trail_magic/:lat/:long/:contents' do
+post '/found_trail_magic' do
 	uri = URI.parse(ENV['MONGOHQ_URL'])
 	conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
 	db = conn.db(uri.path.gsub(/^\//, ''))
